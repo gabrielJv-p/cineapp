@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        ← Voltar
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      ⭐ Filmes Destacados
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- loading -->
+
+  <div *appIfLoading="loading">
+
+    <ion-spinner></ion-spinner>
+
+    <p>Carregando filmes...</p>
+
+  </div>
+
+  <!-- filmes -->
+
+  <app-movie-card
+    *appForMovies="movies; let movie"
+    [movie]="movie">
+  </app-movie-card>
