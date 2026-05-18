@@ -1,35 +1,83 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      🎬 CineApp
-    </ion-title>
+    <div class="toolbar-content">
+      <img src="assets/logo.svg" alt="CineApp" class="toolbar-logo" />
+      <ion-button fill="clear" class="notif-btn">
+        <ion-icon name="notifications-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
 
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">
-        Filmes Populares
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Boas vindas -->
+  <div class="welcome-section">
+    <p class="welcome-text">Bem-vindo!</p>
+    <h1 class="welcome-title">Encontre os melhores filmes para assistir</h1>
+  </div>
 
-  <div id="container">
+  <!-- Banner destaque -->
+  <div class="banner">
+    <img [src]="bannerMovie ? getImageUrl(bannerMovie.poster_path) : ''" [alt]="bannerMovie?.title" class="banner-img" />
+    <div class="banner-overlay">
+      <span class="badge-destaque">Destaque</span>
+      <h2 class="banner-title">{{ bannerMovie?.title }}</h2>
+      <p class="banner-meta">
+        {{ bannerMovie?.release_date | date:'yyyy' }} •
+        {{ bannerMovie?.vote_average | number:'1.1-1' }} ⭐
+      </p>
+      <div class="banner-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
 
-    <ion-button routerLink="/search">
-      🔍 Buscar Filmes
-    </ion-button>
+  <!-- Em alta -->
+  <div class="section">
+    <div class="section-header">
+      <h3>Em alta</h3>
+      <a routerLink="/rated_movies" class="ver-todos">Ver todos</a>
+    </div>
+    <div class="horizontal-scroll">
+      @for (movie of movies; track movie.id) {
+        <app-movie-card [movie]="movie"></app-movie-card>
+      }
+    </div>
+  </div>
 
-    <ion-button routerLink="/favorites">
-      ❤️ Favoritos
-    </ion-button>
-
-    <ion-button routerLink="/rated_movies">
-      ⭐ Filmes Destacados
-    </ion-button>
-
+  <!-- Categorias -->
+  <div class="section">
+    <div class="section-header">
+      <h3>Categorias</h3>
+    </div>
+    <div class="categories-scroll">
+      @for (cat of categories; track cat) {
+        <ion-chip class="category-chip">{{ cat }}</ion-chip>
+      }
+    </div>
   </div>
 
 </ion-content>
+
+<!-- Bottom Navigation -->
+<ion-tab-bar>
+  <ion-tab-button routerLink="/home" routerLinkActive="tab-active">
+    <ion-icon name="home"></ion-icon>
+    <ion-label>Home</ion-label>
+  </ion-tab-button>
+  <ion-tab-button routerLink="/rated_movies" routerLinkActive="tab-active">
+    <ion-icon name="star-outline"></ion-icon>
+    <ion-label>Destaques</ion-label>
+  </ion-tab-button>
+  <ion-tab-button routerLink="/favorites" routerLinkActive="tab-active">
+    <ion-icon name="heart-outline"></ion-icon>
+    <ion-label>Favoritos</ion-label>
+  </ion-tab-button>
+  <ion-tab-button routerLink="/search" routerLinkActive="tab-active">
+    <ion-icon name="search-outline"></ion-icon>
+    <ion-label>Pesquisa</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

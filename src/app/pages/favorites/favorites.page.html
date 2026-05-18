@@ -1,25 +1,65 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>❤️ Favoritos</ion-title>
-    <ion-buttons slot="start">
-      <ion-button routerLink="/home">← Voltar</ion-button>
-    </ion-buttons>
+    <div class="toolbar-content">
+      <h2 class="page-title">Favoritos</h2>
+      <div class="toolbar-actions">
+        <ion-button fill="clear">
+          <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear">
+          <ion-icon name="ellipsis-vertical-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Meus Favoritos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
 
-  <div id="container">
-    <p *ngIf="movies.length === 0">Nenhum filme favorito ainda.</p>
+  <!-- Lista vazia -->
+  @if (movies.length === 0) {
+    <div class="empty-container">
+      <div class="heart-icon">
+        <ion-icon name="heart-outline"></ion-icon>
+      </div>
+      <h3>Sua lista de favoritos está vazia</h3>
+      <p>Adicione filmes aos favoritos para vê-los aqui.</p>
+      <ion-button routerLink="/rated_movies" color="primary" shape="round">
+        Explorar destaques
+      </ion-button>
+    </div>
+  }
 
-    <app-movie-card
-      *ngFor="let movie of movies"
-      [movie]="movie">
-    </app-movie-card>
-  </div>
+  <!-- Lista de favoritos -->
+  @if (movies.length > 0) {
+    <div class="section-title">
+      <h3>Populares</h3>
+    </div>
+    <div class="movies-list">
+      @for (movie of movies; track movie.id) {
+        <app-movie-card [movie]="movie"></app-movie-card>
+      }
+    </div>
+  }
+
 </ion-content>
+
+<!-- Bottom Navigation -->
+<ion-tab-bar>
+  <ion-tab-button routerLink="/home" routerLinkActive="tab-active">
+    <ion-icon name="home-outline"></ion-icon>
+    <ion-label>Home</ion-label>
+  </ion-tab-button>
+  <ion-tab-button routerLink="/rated_movies" routerLinkActive="tab-active">
+    <ion-icon name="star-outline"></ion-icon>
+    <ion-label>Destaques</ion-label>
+  </ion-tab-button>
+  <ion-tab-button routerLink="/favorites" routerLinkActive="tab-active">
+    <ion-icon name="heart"></ion-icon>
+    <ion-label>Favoritos</ion-label>
+  </ion-tab-button>
+  <ion-tab-button routerLink="/search" routerLinkActive="tab-active">
+    <ion-icon name="search-outline"></ion-icon>
+    <ion-label>Pesquisa</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

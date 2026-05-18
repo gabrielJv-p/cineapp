@@ -1,0 +1,77 @@
+ion-toolbar {
+  --background: #0E1117;
+  --border-color: transparent;
+}
+
+.toolbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+
+  .page-title {
+    color: #F2F2F7;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .search-btn {
+    --color: #F2F2F7;
+  }
+}
+
+ion-content {
+  --background: #0E1117;
+}
+
+.filters-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 16px;
+
+  &::-webkit-scrollbar { display: none; }
+
+  ion-chip {
+    --background: #171A21;
+    --color: #A1A1AA;
+    border: 1px solid #2A2F3A;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+
+    &.active-filter {
+      --background: #7C3AED;
+      --color: #F2F2F7;
+      border-color: #7C3AED;
+    }
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.movies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px 16px;
+
+  app-movie-card {
+    width: 100%;
+  }
+}
+
+ion-tab-bar {
+  --background: #171A21;
+  --border: none;
+  padding: 8px 0;
+
+  ion-tab-button {
+    --color: #A1A1AA;
+    --color-selected: #7C3AED;
+  }
+}

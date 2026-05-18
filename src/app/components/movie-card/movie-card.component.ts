@@ -14,6 +14,7 @@ import { MovieService } from '../../services/movie.service';
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
+  styleUrls: ['./movie-card.component.scss'],
   standalone: true,
   imports: [
     IonCard,

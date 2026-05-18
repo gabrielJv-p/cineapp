@@ -1,0 +1,122 @@
+ion-toolbar {
+  --background: #0E1117;
+  --border-color: transparent;
+
+  ion-title {
+    color: #F2F2F7;
+    font-size: 1rem;
+  }
+
+  ion-back-button {
+    --color: #7C3AED;
+  }
+}
+
+ion-content {
+  --background: #0E1117;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.movie-detail {
+  .poster-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+
+    .poster {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .poster-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(transparent 60%, #0E1117 100%);
+
+      .favorite-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        --color: #EC4B99;
+        font-size: 1.8rem;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .info-container {
+    padding: 16px;
+
+    .title {
+      color: #F2F2F7;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+
+      .rating {
+        color: #F2F2F7;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .dot-divider {
+        color: #A1A1AA;
+      }
+
+      .year,
+      .runtime {
+        color: #A1A1AA;
+        font-size: 0.9rem;
+      }
+    }
+
+    .genres {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+
+      .genre-chip {
+        --background: #1F2430;
+        --color: #A1A1AA;
+        border: 1px solid #2A2F3A;
+        font-size: 0.8rem;
+        height: 28px;
+      }
+    }
+
+    .overview-section {
+      h3 {
+        color: #F2F2F7;
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 0 0 8px;
+      }
+
+      .overview {
+        color: #A1A1AA;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+    }
+  }
+}

@@ -1,25 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonButton, IonButtons } from '@ionic/angular/standalone';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+
+import {
+  IonContent, IonHeader, IonTitle, IonToolbar,
+  IonSearchbar, IonButton, IonButtons, IonIcon,
+  IonLabel, IonTabBar, IonTabButton
+} from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import {
+  homeOutline, starOutline, heartOutline,
+  searchOutline, search
+} from 'ionicons/icons';
+
 import { MovieService } from '../../services/movie.service';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.page.html',
+  styleUrls: ['./search.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonButton, IonButtons, CommonModule, FormsModule, RouterLink, MovieCardComponent]
+  imports: [
+    CommonModule, FormsModule, RouterLink, RouterLinkActive,
+    IonContent, IonHeader, IonTitle, IonToolbar,
+    IonSearchbar, IonButton, IonButtons, IonIcon,
+    IonLabel, IonTabBar, IonTabButton,
+    MovieCardComponent
+  ]
 })
 export class SearchPage implements OnInit {
 
   movies: any[] = [];
 
-  constructor(private movieService: MovieService) { }
-
-  ngOnInit() {
+  constructor(private movieService: MovieService) {
+    addIcons({ homeOutline, starOutline, heartOutline, searchOutline, search });
   }
+
+  ngOnInit() {}
 
   searchMovie(event: any) {
     const query = event.detail.value;
@@ -33,5 +53,4 @@ export class SearchPage implements OnInit {
       this.movies = response.results;
     });
   }
-
 }

@@ -1,27 +1,172 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+ion-toolbar {
+  --background: #0E1117;
+  --border-color: transparent;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.toolbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.toolbar-logo {
+  height: 65px;
+  width: auto;
 }
 
-#container a {
-  text-decoration: none;
+.notif-btn {
+  --color: #F2F2F7;
+}
+
+ion-content {
+  --background: #0E1117;
+}
+
+.welcome-section {
+  padding: 16px 16px 0;
+
+  .welcome-text {
+    color: #A1A1AA;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .welcome-title {
+    color: #F2F2F7;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 4px 0 0;
+    line-height: 1.4;
+  }
+}
+
+.banner {
+  position: relative;
+  margin: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 220px;
+
+  .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .banner-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+
+    .badge-destaque {
+      background: #7C3AED;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    .banner-title {
+      color: #F2F2F7;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 6px 0 2px;
+    }
+
+    .banner-meta {
+      color: #A1A1AA;
+      font-size: 0.8rem;
+      margin: 0 0 8px;
+    }
+
+    .banner-dots {
+      display: flex;
+      gap: 4px;
+
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #A1A1AA;
+
+        &.active {
+          background: #7C3AED;
+          width: 16px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}
+
+.section {
+  padding: 0 16px 12px;
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+
+    h3 {
+      color: #F2F2F7;
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .ver-todos {
+      color: #7C3AED;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+  }
+}
+
+.horizontal-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+
+  &::-webkit-scrollbar { display: none; }
+
+  app-movie-card {
+    min-width: 160px;
+    max-width: 160px;
+    flex-shrink: 0;
+  }
+}
+
+.categories-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+.category-chip {
+  --background: #171A21;
+  --color: #A1A1AA;
+  border: 1px solid #2A2F3A;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+}
+
+ion-tab-bar {
+  --background: #171A21;
+  --border: none;
+  padding: 8px 0;
+
+  ion-tab-button {
+    --color: #A1A1AA;
+    --color-selected: #7C3AED;
+  }
 }

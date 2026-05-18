@@ -1,36 +1,59 @@
-<ion-header [translucent]="true">
-
+<ion-header>
   <ion-toolbar>
-
-    <ion-buttons slot="start">
-      <ion-button routerLink="/home">
-        ← Voltar
+    <div class="toolbar-content">
+      <h2 class="page-title">Destaques</h2>
+      <ion-button fill="clear" class="search-btn">
+        <ion-icon name="search-outline" slot="icon-only"></ion-icon>
       </ion-button>
-    </ion-buttons>
-
-    <ion-title>
-      ⭐ Filmes Destacados
-    </ion-title>
-
+    </div>
   </ion-toolbar>
-
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
 
-  <!-- loading -->
-
-  <div *appIfLoading="loading">
-
-    <ion-spinner></ion-spinner>
-
-    <p>Carregando filmes...</p>
-
+  <!-- Filtros -->
+  <div class="filters-scroll">
+    @for (filter of filters; track filter) {
+      <ion-chip
+        [class.active-filter]="activeFilter === filter"
+        (click)="activeFilter = filter">
+        {{ filter }}
+      </ion-chip>
+    }
   </div>
 
-  <!-- filmes -->
+  <!-- Loading -->
+  <div *appIfLoading="loading" class="loading-container">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </div>
 
-  <app-movie-card
-    *appForMovies="movies; let movie"
-    [movie]="movie">
-  </app-movie-card>
+  <!-- Lista de filmes -->
+  @if (!loading) {
+    <div class="movies-list" *appForMovies="movies">
+      @for (movie of movies; track movie.id) {
+        <app-movie-card [movie]="movie"></app-movie-card>
+      }
+    </div>
+  }
+
+</ion-content>
+
+<!-- Bottom Navigation -->
+<ion-tab-bar>
+  <ion-tab-button routerLink="/home" routerLinkActive="tab-active">
+    <ion-icon name="home-outline"></ion-icon>
+    <ion-label>Home</ion-label>
+  </ion-tab-button>
+  <ion-tab-button routerLink="/rated_movies" routerLinkActive="tab-active">
+    <ion-icon name="star"></ion-icon>
+    <ion-label>Destaques</ion-label>
+  </ion-tab-button>
+  <ion-tab-button routerLink="/favorites" routerLinkActive="tab-active">
+    <ion-icon name="heart-outline"></ion-icon>
+    <ion-label>Favoritos</ion-label>
+  </ion-tab-button>
+  <ion-tab-button routerLink="/search" routerLinkActive="tab-active">
+    <ion-icon name="search-outline"></ion-icon>
+    <ion-label>Pesquisa</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

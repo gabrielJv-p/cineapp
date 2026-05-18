@@ -1,32 +1,73 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Detalhes do Filme</ion-title>
     <ion-buttons slot="start">
-        <ion-button routerLink="/home">← Voltar</ion-button>
-      </ion-buttons>
+      <ion-back-button defaultHref="/home" text="">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ movie?.title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Detalhes do Filme</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
 
-  <div id="container" *ngIf="movie">
-    <img *ngIf="movie.poster_path" [src]="getPosterUrl()" [alt]="movie.title">
+  <!-- Loading -->
+  @if (!movie) {
+    <div class="loading-container">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </div>
+  }
 
-    <h2>{{ movie.title }}</h2>
+  <!-- Conteúdo -->
+  @if (movie) {
+    <div class="movie-detail">
 
-    <p>⭐ {{ movie.vote_average }}</p>
+      <!-- Poster -->
+      <div class="poster-container">
+        <img [src]="getPosterUrl()" [alt]="movie.title" class="poster" />
+        <div class="poster-overlay">
+          <ion-button
+            fill="clear"
+            class="favorite-btn"
+            (click)="toggleFavorite()">
+            <ion-icon
+              [name]="isFavorite ? 'heart' : 'heart-outline'"
+              slot="icon-only">
+            </ion-icon>
+          </ion-button>
+        </div>
+      </div>
 
-    <p>{{ movie.overview }}</p>
+      <!-- Infos -->
+      <div class="info-container">
+        <h1 class="title">{{ movie.title }}</h1>
 
-    <p>Data de lançamento: {{ movie.release_date }}</p>
+        <div class="meta-row">
+          <span class="rating">⭐ {{ movie.vote_average | number:'1.1-1' }}</span>
+          <span class="dot-divider">•</span>
+          <span class="year">{{ movie.release_date | date:'yyyy' }}</span>
+          @if (movie.runtime) {
+            <span class="dot-divider">•</span>
+            <span class="runtime">{{ movie.runtime }}min</span>
+          }
+        </div>
 
-    <ion-button (click)="toggleFavorite()">
-      {{ isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos' }}
-    </ion-button>
-  </div>
+        <!-- Gêneros -->
+        @if (movie.genres && movie.genres.length > 0) {
+          <div class="genres">
+            @for (genre of movie.genres; track genre.id) {
+              <ion-chip class="genre-chip">{{ genre.name }}</ion-chip>
+            }
+          </div>
+        }
+
+        <!-- Sinopse -->
+        <div class="overview-section">
+          <h3>Sinopse</h3>
+          <p class="overview">{{ movie.overview || 'Sinopse não disponível.' }}</p>
+        </div>
+
+      </div>
+    </div>
+  }
+
 </ion-content>
