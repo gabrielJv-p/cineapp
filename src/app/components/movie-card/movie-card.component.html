@@ -1,4 +1,6 @@
-<ion-card [appHighlight]="movie.vote_average">
+<ion-card [appHighlight]="movie.vote_average" [routerLink]="['/details', movie.id]">
+
+  <img *ngIf="movie.poster_path" [src]="getPosterUrl()" [alt]="movie.title">
 
   <ion-card-header>
 

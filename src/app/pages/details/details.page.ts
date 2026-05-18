@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonButtons } from '@ionic/angular/standalone';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-details',
@@ -12,9 +13,36 @@ import { RouterLink } from '@angular/router';
 })
 export class DetailsPage implements OnInit {
 
-  constructor() { }
+  movie: any;
+  isFavorite = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private movieService: MovieService
+  ) { }
 
   ngOnInit() {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.movieService.getMovieDetails(id).subscribe((response: any) => {
+      this.movie = response;
+      this.isFavorite = this.movieService.isFavorite(response.id);
+    });
+  }
+
+  getPosterUrl() {
+    return this.movie.poster_path ? this.movieService.getImageUrl(this.movie.poster_path) : '';
+  }
+
+  toggleFavorite() {
+    if (this.isFavorite) {
+      this.movieService.removeFavorite(this.movie.id);
+      this.isFavorite = false;
+      return;
+    }
+
+    this.movieService.addFavorite(this.movie);
+    this.isFavorite = true;
   }
 
 }

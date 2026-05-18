@@ -15,6 +15,11 @@
   </ion-header>
 
   <div id="container">
-    <strong>Meus Favoritos</strong>
+    <p *ngIf="movies.length === 0">Nenhum filme favorito ainda.</p>
+
+    <app-movie-card
+      *ngFor="let movie of movies"
+      [movie]="movie">
+    </app-movie-card>
   </div>
 </ion-content>

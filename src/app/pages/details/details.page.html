@@ -14,7 +14,19 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Detalhes</strong>
+  <div id="container" *ngIf="movie">
+    <img *ngIf="movie.poster_path" [src]="getPosterUrl()" [alt]="movie.title">
+
+    <h2>{{ movie.title }}</h2>
+
+    <p>⭐ {{ movie.vote_average }}</p>
+
+    <p>{{ movie.overview }}</p>
+
+    <p>Data de lançamento: {{ movie.release_date }}</p>
+
+    <ion-button (click)="toggleFavorite()">
+      {{ isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos' }}
+    </ion-button>
   </div>
 </ion-content>
