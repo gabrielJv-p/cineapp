@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';   
+import { MovieService } from '../../services/movie.service';
 
 import {
   IonContent,
@@ -44,26 +44,13 @@ export class Rated_moviesPage implements OnInit {
 
   loading = true;
 
-  movies = [
-    {
-      title: 'Interestelar',
-      vote_average: 9
-    },
-    {
-      title: 'Batman',
-      vote_average: 7
-    },
-    {
-      title: 'Matrix',
-      vote_average: 8.5
-    }
-  ];
+  movies: any[] = [];
+  constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
-
-    setTimeout(() => {
+    this.movieService.getTopRatedMovies().subscribe((response: any) => {
+      this.movies = response.results;
       this.loading = false;
-    }, 2000);
-
+    });
   }
 }
